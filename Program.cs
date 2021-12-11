@@ -6,10 +6,11 @@ namespace spiralMatrix
     {
         private static int _row;
         private static int _col;
-        private static readonly int N = Convert.ToInt32(Console.ReadLine());
-        private static readonly int[,] Array = new int[N , N];
+        
+        private static int _n ;
+        private static int[,] _array;
         private static string _direction = "right";
-        private static readonly int TotalRotations = N*N;
+        private static int _totalRotations;
 
         private static void Main()
         {
@@ -17,19 +18,28 @@ namespace spiralMatrix
             //  9  8  7  6...
             // 10 11 12 13...     
 
+            Console.Write("Type a number: ");
 
-            for (int i = 1; i <= TotalRotations; i++)
+            _n = Convert.ToInt32(Console.ReadLine());
+            _array = new int[_n, _n];
+            _totalRotations = _n * _n;
+
+            Console.WriteLine(new string(' ', 10));
+            
+            // Not here
+
+            for (int i = 1; i <= _totalRotations; i++)
             {
                 CanOccupy(); 
-                Array[_row, _col] = i;
+                _array[_row, _col] = i;
                 SwitchDirection();
             }
 
-            for (int i = 0; i < N; i++)  
+            for (int i = 0; i < _n; i++)  
             {  
-                for (int j = 0; j < N; j++)  
+                for (int j = 0; j < _n; j++)  
                 {  
-                    Console.Write("{0, 4}", Array[i, j]);  
+                    Console.Write("{0, 4}", _array[i, j]);  
                 }  
                 Console.WriteLine();  
             }  
@@ -37,28 +47,28 @@ namespace spiralMatrix
 
         private static void CanOccupy()
         {
-            if (_direction == "right" && (_col > N - 1 || Array[_row, _col] != 0))
+            if (_direction == "right" && (_col > _n - 1 || _array[_row, _col] != 0))
             {
                 _direction = "down";
                 _row++; // Increase Row to go down
                 _col--; // To make it return back in the array  
             }
 
-            if (_direction == "down" && (_row > N - 1 || Array[_row, _col] != 0))
+            if (_direction == "down" && (_row > _n - 1 || _array[_row, _col] != 0))
             {
                 _direction = "left";
                 _col--; 
                 _row--; 
             }
 
-            if (_direction == "left" && (_col < 0 || Array[_row, _col] != 0))
+            if (_direction == "left" && (_col < 0 || _array[_row, _col] != 0))
             {
                 _direction = "top";
                 _col++;
                 _row--; 
             }
 
-            if (_direction == "top" && (_row < 0 || Array[_row, _col] != 0))
+            if (_direction == "top" && (_row < 0 || _array[_row, _col] != 0))
             {
                 _direction = "right";
                 _row++; 
